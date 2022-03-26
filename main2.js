@@ -33,9 +33,9 @@ onload = () => {
     };
 
     function motion(x , y){
-        point = grid.getNode(Math.floor(x / cellSide), Math.floor(y / cellSide));
-        grid.applyInfluence(point.x, point.y, radius);
         if (sos == true){
+            point = grid.getNode(Math.floor(x / cellSide), Math.floor(y / cellSide));
+            grid.applyInfluence(point.x, point.y, radius);
             points.push({x, y});
         }
         grid.clearGrid();
