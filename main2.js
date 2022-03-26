@@ -1,8 +1,8 @@
 onload = () => {
     const canvas = document.getElementById('CANVAS');
     const ctx = canvas.getContext('2d');
-    canvas.width = 600;
-    canvas.height = 600;
+    canvas.width = 500;
+    canvas.height = 500;
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     let points = [];
@@ -50,7 +50,7 @@ onload = () => {
                 ctx.fillRect(x-1, y-1, 3, 3);
             }
         }
-        const segments = [];
+        const squares = [];
         for(let i = 0; i < grid.cols - 1; i ++) {
             for(let j = 0; j < grid.rows - 1; j ++) {
                 const cellPoints = [
@@ -60,16 +60,16 @@ onload = () => {
                     grid.getNode(j, i + 1)
                 ];
                 for (let seg of getSegments(cellPoints, treshold)) {
-                    segments.push(seg);
+                    squares.push(seg);
 
                 };
             }
         }
         ctx.strokeStyle = 'white';
-        for (const s of segments) {
+        for (const square of squares) {
             ctx.beginPath();
-            ctx.moveTo(s[0].x, s[0].y);
-            ctx.lineTo(s[1].x, s[1].y);
+            ctx.moveTo(square[0].x, square[0].y);
+            ctx.lineTo(square[1].x, square[1].y);
             ctx.stroke();
         }
 
