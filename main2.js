@@ -26,7 +26,6 @@ onload = () => {
     document.getElementById('newtresHold').value = treshold * 100;
 
 
-
     const getMouseCoords = e => {
         const rect = canvas.getBoundingClientRect();
         return [e.clientX - rect.x, e.clientY - rect.y]
@@ -34,9 +33,8 @@ onload = () => {
 
     function motion(x , y){
         if (sos == true){
-            point = grid.getNode(Math.floor(x / cellSide), Math.floor(y / cellSide));
-            grid.applyInfluence(point.x, point.y, radius);
             points.push({x, y});
+            grid.applyInfluence(x, y, radius);
         }
         grid.clearGrid();
         for (let point of points) {
@@ -72,15 +70,12 @@ onload = () => {
             ctx.lineTo(square[1].x, square[1].y);
             ctx.stroke();
         }
-
     }
 
     canvas.onmousedown = e => {
         sos = true;
-        if (e.button === 0) {
-            [x, y] = getMouseCoords(e);
-            motion(x, y);
-        }
+        [x, y] = getMouseCoords(e);
+        motion(x, y);
     };
 
     canvas.onmousemove = e => {
