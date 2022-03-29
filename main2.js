@@ -25,11 +25,12 @@ onload = () => {
     });
     document.getElementById('newtresHold').value = treshold * 100;
 
-
-    const getMouseCoords = e => {
-        const rect = canvas.getBoundingClientRect();
-        return [e.clientX - rect.x, e.clientY - rect.y]
-    };
+    function relativeCoors(e) {
+        return {
+          x: e.pageX - e.target.offsetLeft,
+          y: e.pageY - e.target.offsetTop
+        };
+    }
 
     function motion(x , y){
         if (sos == true){
@@ -74,8 +75,7 @@ onload = () => {
 
     canvas.onmousedown = e => {
         sos = true;
-        [x, y] = getMouseCoords(e);
-        motion(x, y);
+        motion(relativeCoors(e).x, relativeCoors(e).y);
     };
 
     canvas.onmousemove = e => {
@@ -87,8 +87,7 @@ onload = () => {
                     return;
                 }
             }
-            [x, y] = getMouseCoords(e);
-            motion(x, y);
+            motion(relativeCoors(e).x, relativeCoors(e).y);
         }
     }
 
